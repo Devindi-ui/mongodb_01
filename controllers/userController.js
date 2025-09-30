@@ -25,12 +25,42 @@ const userController = {
     },
 
     getUserById: async(req, res) => {
-        const {id} = req.params;
         try {
+            const {id} = req.params;
             const user = await User.findById(id);
             if(!user){
                 return res.status(404).json({msg: 'User not found'});
             }
+            return res.status(200).json(user);
+        } catch (error) {
+            if(error.kind === 'objectedId'){
+                return res.status(500).json({msg: error.message});
+            }
+            return res.status(500).json({msg: error.message});
+        }
+    },
+
+    updateUser: async(req, res) => {
+        try {
+            const {id} = req.params;
+            const {name, email, age} = req.body;
+            const user = await User.findByIdAndUpdate(
+                id,
+                {name, email, age},
+                {new: true},
+            );
+
+            if(!user){return res.status(404).json({msg: 'User not found'});}
+            return res.status(200).json({msg: 'User updated successfully', user});
+
+        } catch (error) {
+            return res.status(500).json({msg: error.message});
+        }
+    },
+
+    deleteUser: async(req, res) => {
+        try {
+            const {id} 
         } catch (error) {
             return res.status(500).json({msg: error.message});
         }
