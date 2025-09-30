@@ -19,6 +19,22 @@ const ItemController = {
         } catch (error) {
             return res.status(500).json({msg: error.message});
         }
+    },
+
+    getItemById: async(req, res) => {
+        try {
+            const {id} = req.params;
+            const item = await Item.findById(id);
+            if(!item){
+                return res.status(404).json({msg: 'Item not found'});
+            }
+            return res.status(200).json(item);
+        } catch (error) {
+            if(error.kind === 'objectId'){
+                return res.status(500).json({msg: error.message});
+            }
+            return res.status(500).json({msg: error.message});
+        }
     }
 }
 
