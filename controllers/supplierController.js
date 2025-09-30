@@ -40,6 +40,24 @@ const SupplierController = {
             }
             return res.status(500).json({msg: error.message});
         }
+    },
+
+    updateSupplier: async(req, res) => {
+        try {
+            const {id} = req.params;
+            const {name, nic, city, contact} = req.body;
+            const supplier = await Supplier.findByIdAndUpdate(
+                id,
+                {name, nic, city, contact},
+                {new: true},
+            );
+
+            if(!supplier){return res.status(404).json({msg: 'Supplier not found'});}
+            return res.status(200).json({msg: 'Supplier updated successfully', supplier});
+
+        } catch (error) {
+            return res.status(500).json({msg: error.message});
+        }
     }
 };
 
