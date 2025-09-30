@@ -52,7 +52,9 @@ const SupplierController = {
                 {new: true},
             );
 
-            if(!supplier){return res.status(404).json({msg: 'Supplier not found'});}
+            if(!supplier){
+                return res.status(404).json({msg: 'Supplier not found'});
+            }
             return res.status(200).json({msg: 'Supplier updated successfully', supplier});
 
         } catch (error) {
@@ -66,7 +68,7 @@ const SupplierController = {
             const supplier = await Supplier.findByIdAndDelete(id);
 
             if(!supplier){return res.status(404).json({msg: 'Supplier not found'});}
-            return res.status(200).json({msg: 'Supplier deleted successfully.'});
+            return res.status(200).json({msg: 'Supplier deleted successfully.'});   
 
         } catch (error) {
             return res.status(500).json({msg: error.message});
