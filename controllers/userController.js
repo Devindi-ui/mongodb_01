@@ -6,7 +6,7 @@ const userController = {
         try {
             const user = new User({name, email, age});
             await user.save();
-            return res.status(201).json({msg: 'User created successfully'});
+            return res.status(201).json({msg: 'User created successfully!'});
         } catch (error) {
             if(error.code === 11000){   //If unique only
                 return res.status(400).json({msg: 'Email already exists'});
@@ -28,7 +28,7 @@ const userController = {
         try {
             const {id} = req.params;
             const user = await User.findById(id);
-            
+
             if(!user){
                 return res.status(404).json({msg: 'User not found'});
             }
