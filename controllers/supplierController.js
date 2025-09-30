@@ -22,6 +22,24 @@ const SupplierController = {
         } catch (error) {
             return res.status(500).json({msg: error.message});
         }
+    },
+
+    getSupplierById: async(req, res) => {
+        try {
+            const {id} = req.params;
+            const supplier = await Supplier.findById(id);
+
+            if(!supplier){
+                return res.status(404).json({msg: 'Supplier not found.'});
+            }
+            return res.status(200).json(supplier);
+
+        } catch (error) {
+            if(error.kind === 'objectId'){
+                return res.status(500).json({msg: error.message});
+            }
+            return res.status(500).json({msg: error.message});
+        }
     }
 };
 
