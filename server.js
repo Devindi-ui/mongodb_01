@@ -5,6 +5,7 @@ require('dotenv').config();
 
 const usersRoute = require('./routers/usersRoute');
 const itemsRoute = require('./routers/itemRoute');
+const supplierRoute = require('./routers/supplierRoute');
 
 const connectDB = require('./config/mongodb');
 connectDB();
@@ -14,6 +15,7 @@ app.use(cors());
 
 app.use('/api/v2/users', usersRoute);
 app.use('/api/v2/items', itemsRoute);
+app.use('/api/v2/suppliers', supplierRoute);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
