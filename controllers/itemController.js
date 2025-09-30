@@ -49,7 +49,20 @@ const ItemController = {
 
             if(!item){return res.status(404).json({msg: 'Item not found'});}
             return res.status(200).json({msg:'Item updated successfully!', item});
+
+        } catch (error) {
+            return res.status(500).json({msg: error.message});
+        }
+    },
+
+    deleteItem: async(req, res) => {
+        try {
+            const {id} = req.params;
+            const item = await Item.findOneAndDelete(id);
             
+            if(!item){return res.status(404).json({msg: 'Item not found'});}
+            return res.status(200).json({msg: 'Item deleted successfully.'});
+
         } catch (error) {
             return res.status(500).json({msg: error.message});
         }
