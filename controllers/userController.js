@@ -60,7 +60,12 @@ const userController = {
 
     deleteUser: async(req, res) => {
         try {
-            const {id} 
+            const {id} = req.params;
+            const user = await User.findByIdAndDelete(id);
+
+            if(!user){return res.status(404).json({msg: 'User not found'});}
+            return res.status(200).json({msg: 'User deleted successfully'});
+            
         } catch (error) {
             return res.status(500).json({msg: error.message});
         }
