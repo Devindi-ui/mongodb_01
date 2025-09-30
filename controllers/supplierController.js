@@ -67,7 +67,9 @@ const SupplierController = {
             const {id} = req.params;
             const supplier = await Supplier.findByIdAndDelete(id);
 
-            if(!supplier){return res.status(404).json({msg: 'Supplier not found'});}
+            if(!supplier){
+                return res.status(404).json({msg: 'Supplier not found'});
+            }
             return res.status(200).json({msg: 'Supplier deleted successfully.'});   
 
         } catch (error) {
