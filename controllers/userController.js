@@ -8,7 +8,7 @@ const userController = {
             await user.save();
             return res.status(201).json({msg: 'User created successfully'});
         } catch (error) {
-            if(error.code === 11000){
+            if(error.code === 11000){   //If unique only
                 return res.status(400).json({msg: 'Email already exists'});
             }
             return res.status(500).json({msg: error.message});
