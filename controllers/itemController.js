@@ -35,6 +35,24 @@ const ItemController = {
             }
             return res.status(500).json({msg: error.message});
         }
+    },
+
+    updateItem: async(req, res) => {
+        try {
+            const {id} = req.params;
+            const {name, description, unitPrice, category} = req.body;
+            const item = await Item.findByIdAndUpdate(
+                id,
+                {name, description, unitPrice, category},
+                {new: true},
+            );
+
+            if(!item){return res.status(404).json({msg: 'Item not found'});}
+            return res.status(200).json({msg:'Item updated successfully!', item});
+            
+        } catch (error) {
+            return res.status(500).json({msg: error.message});
+        }
     }
 }
 

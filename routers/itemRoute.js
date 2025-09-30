@@ -5,5 +5,6 @@ const itemController = require('../controllers/itemController');
 router.post('/create', itemController.createItem);
 router.get('/all', itemController.getAllItems);
 router.get('/find/:id', itemController.getItemById);
+router.put('/update/:id', itemController.updateItem);
 
 module.exports = router;
